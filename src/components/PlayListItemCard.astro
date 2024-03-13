@@ -23,10 +23,11 @@ const artistString = artists.join(", ");
       src={cover}
       alt={`Cover of ${title} by ${artistString}`}
       class="object-cover w-full h-full rounded-md"
+      transition:name=`playlist ${id} image`
     />
   </picture>
 
-  <div class="flex flex-auto flex-col p-x-2">
+  <div class="flex flex-auto flex-col px-2">
     <h4 class="text-white text-sm">{title}</h4>
     <span class="text-xs text-gray-400">
       {artistString}
