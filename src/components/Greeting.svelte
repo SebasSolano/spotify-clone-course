@@ -5,7 +5,7 @@
 
     let greeting = ""
 
-    if(currentHour > 12){
+    if(currentHour < 12){
         greeting = "Good Morning"
     }else if( currentHour < 18){
         greeting = "Good afternoon"
