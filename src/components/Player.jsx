@@ -2,14 +2,14 @@ import { usePlayerStore } from "@/store/PlayerStore";
 import { useState, useRef, useEffect } from "react";
 import { Slider } from "./Slider";
 
-export const Pause = () => (
-  <svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16">
+export const Pause = ({className}) => (
+  <svg className={className} role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16">
     <path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"></path>
   </svg>
 );
 
-export const Play = () => (
-  <svg role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16">
+export const Play = ({className}) => (
+  <svg className={className} role="img" height="16" width="16" aria-hidden="true" viewBox="0 0 16 16">
     <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"></path>
   </svg>
 );
@@ -94,25 +94,27 @@ const SongControl = ({ audio }) => {
     const seconds = Math.floor(time % 60);
     const minutes = Math.floor(time / 60);
 
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
   const duration = audio?.current?.duration ?? 0;
 
   return (
     <div className="flex gap-x-3 text-xs pt-2">
-      <span className="opacity-50">{formatTime(currentTime)}</span>
+      <span className="opacity-50 w-12 text-right">{formatTime(currentTime)}</span>
       <Slider
         defaultValue={[0]}
         value={[currentTime]}
         max={duration}
         min={0}
-        className="w-[500px]"
+        className="w-[400px]"
         onValueChange={(value) => {
-          audio.current.currentTime = value
+          audio.current.currentTime = value;
         }}
       />
-      <span className="opacity-50">{formatTime(duration)}</span>
+      <span className="opacity-50 w-12">
+        {duration ? formatTime(duration) : '0:00'}
+        </span>
     </div>
   );
 };
@@ -186,8 +188,8 @@ export function Player() {
   };
 
   return (
-    <div className="flex flex-row justify-between w-full px-4 z-50">
-      <div className="">
+    <div className="flex flex-row justify-between w-full px-1 z-50">
+      <div className="w-[250px]">
         <CurrentSong {...currentMusic.song} />
       </div>
 
