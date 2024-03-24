@@ -1,26 +1,36 @@
-import { Play, Pause } from "./Player"
-import { usePlayerStore } from "@/store/PlayerStore"
+import { Play, Pause } from "./Player";
+import { usePlayerStore } from "@/store/PlayerStore";
 
-export function CardPlayButton({id}){
-    
-    const { currentMusic, isPlaying, setIsPlaying, setCurrentMusic } = usePlayerStore(state => state)
+export function CardPlayButton({ id }) {
+  const { currentMusic, isPlaying, setIsPlaying, setCurrentMusic } =
+    usePlayerStore((state) => state);
 
-    const handleClick = async () => {
-        await setCurrentMusic({
-            playlist: {
-                id
-            }
-        })
-
-        setIsPlaying(!isPlaying)               
-        
+  const handleClick = () => {
+    if (isPlayingPlayList) {
+      setIsPlaying(false);
+      return;
     }
 
-    const isPlayingPlayList = isPlaying && currentMusic?.playlist.id === id
+    fetch(`/api/get-info-playlist.json?id=${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const { songs, playlist } = data;
 
-    return(
-        <button onClick={handleClick} className="card-play-button rounded-full bg-green-500 p-4">
-            { isPlayingPlayList ? <Pause /> : <Play />}
-        </button>
-    )
+        setIsPlaying(true);
+        setCurrentMusic({ songs, playlist, song: songs[0] });
+
+        //console.log({ songs, playlist })
+      });
+  };
+
+  const isPlayingPlayList = isPlaying && currentMusic?.playlist.id === id;
+
+  return (
+    <button
+      onClick={handleClick}
+      className="card-play-button rounded-full bg-green-500 p-4"
+    >
+      {isPlayingPlayList ? <Pause /> : <Play />}
+    </button>
+  );
 }

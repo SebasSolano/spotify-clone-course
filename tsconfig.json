@@ -1,7 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": "C:/Users/Sebas/Documents/Astro/spotify-clone-course",
+    "baseUrl": "C:/Users/Accor/Documents/Programacion/Astro/spotify-clone-course",
     "paths": {
       "@/*": [
         "src/*"
