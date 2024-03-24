@@ -55,7 +55,7 @@ export const playlists: Playlist[] = [
       "https://f4.bcbits.com/img/a2793859494_16.jpg",
     artists: ["Chau Saura", "amies", "kyu"],
   },
-  {
+ /*  {
     id: '6',
     albumId: 6,
     title: "Like a Necessity",
@@ -63,7 +63,7 @@ export const playlists: Playlist[] = [
     cover:
       "https://f4.bcbits.com/img/a0363730459_16.jpg",
     artists: ["WFS", "Nadav Cohen"],
-  },
+  },*/
 ];
 
 export const morePlaylists = playlists.map((item) => ({
